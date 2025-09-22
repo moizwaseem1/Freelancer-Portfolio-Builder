@@ -33,7 +33,7 @@ body {
 
 .light-theme .btn {
     background-color: #2563EB;
-    color: white;
+    color: #374151;
 }
 
 .dark-theme {
@@ -43,7 +43,7 @@ body {
 
 .dark-theme .btn {
     background-color: #14B8A6; 
-    color: white;
+    color: #F9FAFB;
 }
 
 .input-form {
