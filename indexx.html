@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelancer Portfolio Builder</title>
+    <link rel="stylesheet" href="stylee.css">
+</head>
+<body>
+
+    <main class="flex-container">
+        
+        <div class="input-form">
+            <h1>Freelancer Portfolio Builder</h1>
+            <p>Enter your details and watch your portfolio come to life!</p>
+
+            <form id="portfolio-form">
+                
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="John Doe" required>
+
+                
+                <label for="bio">Bio:</label>
+                <textarea id="bio" name="bio" rows="4" placeholder="A brief description of yourself and your expertise."></textarea>
+
+                
+                <label for="skills">Skills (comma-separated):</label>
+                <input type="text" id="skills" name="skills" placeholder="HTML, CSS, JS, UI/UX">
+
+                
+                <div id="projects-container">
+                    <h3>Projects</h3>
+                    <div class="project-item">
+                        <label for="project-title-1">Project Title:</label>
+                        <input type="text" id="project-title-1" name="project-title-1" placeholder="My First Project">
+                        <label for="project-desc-1">Project Description:</label>
+                        <textarea id="project-desc-1" name="project-desc-1" rows="2" placeholder="A brief description of the project."></textarea>
+                    </div>
+                </div>
+                <button type="button" id="add-project-btn">Add Another Project</button>
+
+                
+                <div class="contact-info">
+                    <h3>Contact Info</h3>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="john.doe@example.com">
+                    <label for="linkedin">LinkedIn URL:</label>
+                    <input type="url" id="linkedin" name="linkedin" placeholder="https://www.linkedin.com/in/johndoe">
+                    <label for="github">GitHub URL:</label>
+                    <input type="url" id="github" name="github" placeholder="https://github.com/johndoe">
+                </div>
+            </form>
+        </div>
+
+        
+        <div id="portfolio-preview" class="portfolio-preview">
+            <header>
+                <h1 id="preview-name">Your Name</h1>
+                <p id="preview-bio">Your Bio Goes Here</p>
+            </header>
+
+            <section id="preview-skills">
+                <h2>Skills</h2>
+                <ul id="skills-list">
+                </ul>
+            </section>
+
+            <section id="preview-projects">
+                <h2>Projects</h2>
+                <div id="projects-list">
+                </div>
+            </section>
+
+            <section id="preview-contact">
+                <h2>Contact</h2>
+                <p>Email: <span id="preview-email"></span></p>
+                <p>LinkedIn: <a id="preview-linkedin" href="#" target="_blank"></a></p>
+                <p>GitHub: <a id="preview-github" href="#" target="_blank"></a></p>
+            </section>
+
+        </div>
+    </main>
+
+    <div class="controls">
+        <button id="theme-switcher">Toggle Theme</button>
+        <button id="export-html">Export as HTML</button>
+    </div>
+  <script src="appp.js"></script>
+</body>
+</html>
