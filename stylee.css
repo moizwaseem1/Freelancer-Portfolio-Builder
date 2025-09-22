@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 :root {
-    primary-color: #4A90E2; 
-    secondary-color: #50C878; 
-    light-bg-color: #F0F4F8; 
+    primary-color: #3882F6; 
+    secondary-color: #10B9F8; 
+    light-bg-color: #F7FAFC; 
     light-text-color: #334155;
     light-card-bg: #FFFFFF; 
-    dark-bg-color: #1E293B; 
-    dark-text-color: #F1F5F9;
-    dark-card-bg: #2D3748;
+    dark-bg-color: #1F2937; 
+    dark-text-color: #334155;
+    dark-card-bg: #E2E8F0;
 }
 
 body {
