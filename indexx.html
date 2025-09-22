@@ -9,24 +9,19 @@
 <body>
 
     <main class="flex-container">
-        
         <div class="input-form">
             <h1>Freelancer Portfolio Builder</h1>
             <p>Enter your details and watch your portfolio come to life!</p>
-
+            
             <form id="portfolio-form">
-                
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" placeholder="John Doe" required>
 
-                
                 <label for="bio">Bio:</label>
                 <textarea id="bio" name="bio" rows="4" placeholder="A brief description of yourself and your expertise."></textarea>
-
                 
                 <label for="skills">Skills (comma-separated):</label>
                 <input type="text" id="skills" name="skills" placeholder="HTML, CSS, JS, UI/UX">
-
                 
                 <div id="projects-container">
                     <h3>Projects</h3>
@@ -37,8 +32,7 @@
                         <textarea id="project-desc-1" name="project-desc-1" rows="2" placeholder="A brief description of the project."></textarea>
                     </div>
                 </div>
-                <button type="button" id="add-project-btn">Add Another Project</button>
-
+                <button type="button" id="add-project-btn" class="btn">Add Another Project</button>
                 
                 <div class="contact-info">
                     <h3>Contact Info</h3>
@@ -52,39 +46,60 @@
             </form>
         </div>
 
-        
         <div id="portfolio-preview" class="portfolio-preview">
-            <header>
-                <h1 id="preview-name">Your Name</h1>
-                <p id="preview-bio">Your Bio Goes Here</p>
-            </header>
+            <div class="nav-container">
+                <button id="nav-toggle" class="nav-toggle-btn">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </button>
+                <nav id="sliding-nav">
+                    <ul>
+                        <li><a href="#preview-home">Home</a></li>
+                        <li><a href="#preview-skills">Skills</a></li>
+                        <li><a href="#preview-projects">Projects</a></li>
+                        <li><a href="#preview-contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <section id="preview-home" class="portfolio-section">
+                <header>
+                    <h1 id="preview-name">Your Name</h1>
+                    <p id="preview-bio">Your Bio Goes Here</p>
+                </header>
+            </section>
 
-            <section id="preview-skills">
+            <section id="preview-skills" class="portfolio-section">
                 <h2>Skills</h2>
-                <ul id="skills-list">
-                </ul>
+                <ul id="skills-list"></ul>
             </section>
 
-            <section id="preview-projects">
+            <section id="preview-projects" class="portfolio-section">
                 <h2>Projects</h2>
-                <div id="projects-list">
-                </div>
+                <div id="projects-list"></div>
             </section>
 
-            <section id="preview-contact">
+            <section id="preview-contact" class="portfolio-section">
                 <h2>Contact</h2>
                 <p>Email: <span id="preview-email"></span></p>
                 <p>LinkedIn: <a id="preview-linkedin" href="#" target="_blank"></a></p>
                 <p>GitHub: <a id="preview-github" href="#" target="_blank"></a></p>
             </section>
-
         </div>
     </main>
-
+    
     <div class="controls">
+        <label for="design-theme">Choose Design Layout:</label>
+        <select id="design-theme" name="design-theme">
+            <option value="modern">Modern (Default)</option>
+            <option value="minimalist">Minimalist</option>
+            <option value="creative">Creative</option>
+        </select>
         <button id="theme-switcher" class="btn">Toggle Theme</button>
         <button id="export-html" class="btn">Export as HTML</button>
     </div>
-  <script src="appp.js"></script>
+    
+    <script src="appp.js"></script>
 </body>
 </html>
