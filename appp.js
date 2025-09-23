@@ -14,30 +14,77 @@ const designThemeSelect = document.getElementById('design-theme');
 const navToggleBtn = document.getElementById('nav-toggle');
 const slidingNav = document.getElementById('sliding-nav');
 
+const sections = {
+    'about': {
+        input: document.getElementById('about-section'),
+        preview: document.getElementById('preview-home'),
+        nav: document.querySelector('li a[href="#preview-home"]').parentElement,
+    },
+    'skills': {
+        input: document.getElementById('skills-section'),
+        preview: document.getElementById('preview-skills'),
+        nav: document.getElementById('nav-skills-link'),
+    },
+    'projects': {
+        input: document.getElementById('projects-section'),
+        preview: document.getElementById('preview-projects'),
+        nav: document.getElementById('nav-projects-link'),
+    },
+    'contact': {
+        input: document.getElementById('contact-section'),
+        preview: document.getElementById('preview-contact'),
+        nav: document.getElementById('nav-contact-link'),
+    },
+};
+
+const closeNavBtn = document.getElementById('close-nav-btn');
+
+
+closeNavBtn.addEventListener('click', () => {
+    slidingNav.classList.remove('open');
+});
+
+slidingNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        slidingNav.classList.remove('open');
+    });
+});
+
 function updatePreview() {
-    document.getElementById('preview-name').textContent = nameInput.value || 'Your Name';
-    document.getElementById('preview-bio').textContent = bioInput.value || 'Your Bio Goes Here';
+    const nameValue = nameInput.value.trim();
+    const bioValue = bioInput.value.trim();
+    const isAboutValid = nameValue.length > 0 || bioValue.length > 0;
+    
+    sections['about'].preview.style.display = isAboutValid ? 'block' : 'none';
+    sections['about'].nav.style.display = isAboutValid ? 'block' : 'none';
+    document.getElementById('preview-name').textContent = nameValue || 'Your Name';
+    document.getElementById('preview-bio').textContent = bioValue || 'Your Bio Goes Here';
     
     const skillsList = document.getElementById('skills-list');
-    skillsList.innerHTML = '';
     const skillsArray = skillsInput.value.split(',').map(skill => skill.trim()).filter(skill => skill.length > 0);
-    if (skillsArray.length > 0) {
+    const isSkillsValid = skillsArray.length > 0;
+    
+    sections['skills'].preview.style.display = isSkillsValid ? 'block' : 'none';
+    sections['skills'].nav.style.display = isSkillsValid ? 'block' : 'none';
+    skillsList.innerHTML = '';
+    if (isSkillsValid) {
         skillsArray.forEach(skill => {
             const li = document.createElement('li');
+            li.className = 'skill-pill';
             li.textContent = skill;
             skillsList.appendChild(li);
         });
-    } else {
-        skillsList.innerHTML = '<li>Add your skills here.</li>';
     }
     
     const projectsList = document.getElementById('projects-list');
     projectsList.innerHTML = '';
     const projectInputs = projectsContainer.querySelectorAll('.project-item');
+    let hasProjects = false;
     projectInputs.forEach(item => {
-        const title = item.querySelector('input[type="text"]').value;
-        const description = item.querySelector('textarea').value;
+        const title = item.querySelector('input[type="text"]').value.trim();
+        const description = item.querySelector('textarea').value.trim();
         if (title || description) {
+            hasProjects = true;
             const projectCard = document.createElement('div');
             projectCard.className = 'project-card';
             projectCard.innerHTML = `
@@ -47,16 +94,31 @@ function updatePreview() {
             projectsList.appendChild(projectCard);
         }
     });
+    sections['projects'].preview.style.display = hasProjects ? 'block' : 'none';
+    sections['projects'].nav.style.display = hasProjects ? 'block' : 'none';
     
-    document.getElementById('preview-email').textContent = emailInput.value || 'your.email@example.com';
-    document.getElementById('preview-linkedin').href = linkedinInput.value || '#';
-    document.getElementById('preview-linkedin').textContent = linkedinInput.value ? 'LinkedIn Profile' : '';
-    document.getElementById('preview-github').href = githubInput.value || '#';
-    document.getElementById('preview-github').textContent = githubInput.value ? 'GitHub Profile' : '';
+    const emailValue = emailInput.value.trim();
+    const linkedinValue = linkedinInput.value.trim();
+    const githubValue = githubInput.value.trim();
+    const isContactValid = emailValue.length > 0 || linkedinValue.length > 0 || githubValue.length > 0;
+    
+    sections['contact'].preview.style.display = isContactValid ? 'block' : 'none';
+    sections['contact'].nav.style.display = isContactValid ? 'block' : 'none';
+    document.getElementById('preview-email').textContent = emailValue || '';
+    document.getElementById('preview-linkedin').href = linkedinValue || '#';
+    document.getElementById('preview-linkedin').textContent = linkedinValue ? 'LinkedIn Profile' : '';
+    document.getElementById('preview-github').href = githubValue || '#';
+    document.getElementById('preview-github').textContent = githubValue ? 'GitHub Profile' : '';
 }
 
 function getFullHtml() {
-    const previewContent = preview.innerHTML;
+    let previewContent = '';
+    for (const key in sections) {
+        if (sections[key].preview.style.display !== 'none') {
+            previewContent += sections[key].preview.outerHTML;
+        }
+    }
+    
     const allStyles = Array.from(document.styleSheets)
         .map(sheet => {
             try {
@@ -82,7 +144,16 @@ function getFullHtml() {
     </style>
 </head>
 <body class="${document.body.classList.contains('dark-theme') ? 'dark-theme' : 'light-theme'}">
-    <div class="portfolio-preview ${preview.className.split(' ').slice(1).join(' ')}">${previewContent}</div>
+    <div class="portfolio-preview ${preview.className.split(' ').slice(1).join(' ')}">
+        <div class="nav-container">
+            <nav>
+                <ul>
+                    ${Object.keys(sections).filter(key => sections[key].nav.style.display !== 'none').map(key => `<li><a href="#preview-${key}">${sections[key].nav.textContent.trim()}</a></li>`).join('')}
+                </ul>
+            </nav>
+        </div>
+        ${previewContent}
+    </div>
 </body>
 </html>
     `;
@@ -90,7 +161,9 @@ function getFullHtml() {
 }
 
 form.addEventListener('input', updatePreview);
+
 addProjectBtn.addEventListener('click', () => {
+    const projectCount = projectsContainer.querySelectorAll('.project-item').length + 1;
     const projectItem = document.createElement('div');
     projectItem.className = 'project-item';
     projectItem.innerHTML = `
@@ -101,6 +174,7 @@ addProjectBtn.addEventListener('click', () => {
     `;
     projectsContainer.appendChild(projectItem);
     projectItem.querySelectorAll('input, textarea').forEach(el => el.addEventListener('input', updatePreview));
+    updatePreview();
 });
 
 themeSwitcher.addEventListener('click', () => {
@@ -122,7 +196,7 @@ exportBtn.addEventListener('click', () => {
 
 designThemeSelect.addEventListener('change', () => {
     const selectedTheme = designThemeSelect.value;
-    preview.classList.remove('modern', 'minimalist', 'creative');
+    preview.classList.remove('modern', 'minimalist', 'creative', 'professional');
     preview.classList.add(selectedTheme);
 });
 
@@ -137,7 +211,7 @@ slidingNav.querySelectorAll('a').forEach(link => {
 });
 
 updatePreview();
-const themes = ['modern', 'minimalist', 'creative'];
+const themes = ['modern', 'minimalist', 'creative', 'professional'];
 const randomTheme = themes[Math.floor(Math.random() * themes.length)];
 preview.classList.add(randomTheme);
 designThemeSelect.value = randomTheme;
