@@ -8,60 +8,82 @@
 </head>
 <body>
 
+    <div class="nav-container">
+        <button id="nav-toggle" class="nav-toggle-btn">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </button>
+        <nav id="sliding-nav">
+            <button id="close-nav-btn" class="close-nav-btn">&times;</button>
+            <ul>
+                <li><a href="#preview-home">Home</a></li>
+                <li id="nav-skills-link" style="display:none;"><a href="#preview-skills">Skills</a></li>
+                <li id="nav-projects-link" style="display:none;"><a href="#preview-projects">Projects</a></li>
+                <li id="nav-contact-link" style="display:none;"><a href="#preview-contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
     <main class="flex-container">
         <div class="input-form">
             <h1>Freelancer Portfolio Builder</h1>
             <p>Enter your details and watch your portfolio come to life!</p>
             
             <form id="portfolio-form">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" placeholder="John Doe" required>
-
-                <label for="bio">Bio:</label>
-                <textarea id="bio" name="bio" rows="4" placeholder="A brief description of yourself and your expertise."></textarea>
                 
-                <label for="skills">Skills (comma-separated):</label>
-                <input type="text" id="skills" name="skills" placeholder="HTML, CSS, JS, UI/UX">
-                
-                <div id="projects-container">
-                    <h3>Projects</h3>
-                    <div class="project-item">
-                        <label for="project-title-1">Project Title:</label>
-                        <input type="text" id="project-title-1" name="project-title-1" placeholder="My First Project">
-                        <label for="project-desc-1">Project Description:</label>
-                        <textarea id="project-desc-1" name="project-desc-1" rows="2" placeholder="A brief description of the project."></textarea>
+                <div id="about-section" class="input-section">
+                    <h3>About</h3>
+                    <div class="input-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" placeholder="John Doe">
+                    </div>
+                    <div class="input-group">
+                        <label for="bio">Bio:</label>
+                        <textarea id="bio" name="bio" rows="4" placeholder="A brief description of yourself and your expertise."></textarea>
                     </div>
                 </div>
-                <button type="button" id="add-project-btn" class="btn">Add Another Project</button>
+
+                <div id="skills-section" class="input-section">
+                    <h3>Skills</h3>
+                    <div class="input-group">
+                        <label for="skills">Skills (comma-separated):</label>
+                        <input type="text" id="skills" name="skills" placeholder="HTML, CSS, JS, UI/UX">
+                    </div>
+                </div>
                 
-                <div class="contact-info">
+                <div id="projects-section" class="input-section">
+                    <h3>Projects</h3>
+                    <div id="projects-container">
+                        <div class="project-item">
+                            <label for="project-title-1">Project Title:</label>
+                            <input type="text" id="project-title-1" name="project-title-1" placeholder="My First Project">
+                            <label for="project-desc-1">Project Description:</label>
+                            <textarea id="project-desc-1" name="project-desc-1" rows="2" placeholder="A brief description of the project."></textarea>
+                        </div>
+                    </div>
+                    <button type="button" id="add-project-btn" class="btn">Add Another Project</button>
+                </div>
+                
+                <div id="contact-section" class="input-section">
                     <h3>Contact Info</h3>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" placeholder="john.doe@example.com">
-                    <label for="linkedin">LinkedIn URL:</label>
-                    <input type="url" id="linkedin" name="linkedin" placeholder="https://www.linkedin.com/in/johndoe">
-                    <label for="github">GitHub URL:</label>
-                    <input type="url" id="github" name="github" placeholder="https://github.com/johndoe">
+                    <div class="input-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="john.doe@example.com">
+                    </div>
+                    <div class="input-group">
+                        <label for="linkedin">LinkedIn URL:</label>
+                        <input type="url" id="linkedin" name="linkedin" placeholder="https://www.linkedin.com/in/johndoe">
+                    </div>
+                    <div class="input-group">
+                        <label for="github">GitHub URL:</label>
+                        <input type="url" id="github" name="github" placeholder="https://github.com/johndoe">
+                    </div>
                 </div>
             </form>
         </div>
 
         <div id="portfolio-preview" class="portfolio-preview">
-            <div class="nav-container">
-                <button id="nav-toggle" class="nav-toggle-btn">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                </button>
-                <nav id="sliding-nav">
-                    <ul>
-                        <li><a href="#preview-home">Home</a></li>
-                        <li><a href="#preview-skills">Skills</a></li>
-                        <li><a href="#preview-projects">Projects</a></li>
-                        <li><a href="#preview-contact">Contact</a></li>
-                    </ul>
-                </nav>
-            </div>
             
             <section id="preview-home" class="portfolio-section">
                 <header>
@@ -95,6 +117,7 @@
             <option value="modern">Modern (Default)</option>
             <option value="minimalist">Minimalist</option>
             <option value="creative">Creative</option>
+            <option value="professional">Professional</option>
         </select>
         <button id="theme-switcher" class="btn">Toggle Theme</button>
         <button id="export-html" class="btn">Export as HTML</button>
