@@ -8,121 +8,146 @@
 </head>
 <body>
 
-    <div class="nav-container">
-        <button id="nav-toggle" class="nav-toggle-btn">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </button>
-        <nav id="sliding-nav">
-            <button id="close-nav-btn" class="close-nav-btn">&times;</button>
-            <ul>
-                <li><a href="#preview-home">Home</a></li>
-                <li id="nav-skills-link" style="display:none;"><a href="#preview-skills">Skills</a></li>
-                <li id="nav-projects-link" style="display:none;"><a href="#preview-projects">Projects</a></li>
-                <li id="nav-contact-link" style="display:none;"><a href="#preview-contact">Contact</a></li>
-            </ul>
-        </nav>
-    </div>
-
     <main class="flex-container">
         <div class="input-form">
             <h1>Freelancer Portfolio Builder</h1>
-            <p>Enter your details and watch your portfolio come to life!</p>
+            <p>Enter your details and click "Make Portfolio" to generate your file.</p>
             
             <form id="portfolio-form">
                 
-                <div id="about-section" class="input-section">
-                    <h3>About</h3>
-                    <div class="input-group">
-                        <label for="name">Name:</label>
-                        <input type="text" id="name" name="name" placeholder="John Doe">
-                    </div>
-                    <div class="input-group">
-                        <label for="bio">Bio:</label>
-                        <textarea id="bio" name="bio" rows="4" placeholder="A brief description of yourself and your expertise."></textarea>
+                <div class="input-section collapsible active" id="about-section">
+                    <h3>About <span class="toggle-icon">+</span></h3>
+                    <div class="collapsible-content">
+                        <div class="input-group">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" placeholder="John Doe">
+                        </div>
+                        <div class="input-group">
+                            <label for="bio">Bio:</label>
+                            <textarea id="bio" name="bio" rows="4" placeholder="A brief description of yourself and your expertise."></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="profile-picture">Profile Picture:</label>
+                            <input type="file" id="profile-picture" name="profile-picture" accept="image/*">
+                        </div>
                     </div>
                 </div>
 
-                <div id="skills-section" class="input-section">
-                    <h3>Skills</h3>
-                    <div class="input-group">
-                        <label for="skills">Skills (comma-separated):</label>
-                        <input type="text" id="skills" name="skills" placeholder="HTML, CSS, JS, UI/UX">
+                <div class="input-section collapsible" id="skills-section">
+                    <h3>Skills <span class="toggle-icon">+</span></h3>
+                    <div class="collapsible-content">
+                        <div class="input-group">
+                            <label for="skills">Skills (comma-separated):</label>
+                            <input type="text" id="skills" name="skills" placeholder="HTML, CSS, JS, UI/UX">
+                        </div>
                     </div>
                 </div>
-                
-                <div id="projects-section" class="input-section">
-                    <h3>Projects</h3>
-                    <div id="projects-container">
+
+                <div class="input-section collapsible" id="experience-section">
+                    <h3>Experience <span class="toggle-icon">+</span></h3>
+                    <div class="collapsible-content" id="experience-container">
+                        <div class="experience-item">
+                            <label for="experience-title-1">Job Title:</label>
+                            <input type="text" id="experience-title-1" name="experience-title-1" placeholder="Lead Developer">
+                            <label for="experience-company-1">Company:</label>
+                            <input type="text" id="experience-company-1" name="experience-company-1" placeholder="Tech Solutions Inc.">
+                            <label for="experience-duration-1">Duration:</label>
+                            <input type="text" id="experience-duration-1" name="experience-duration-1" placeholder="Jan 2020 - Dec 2022">
+                            <label for="experience-desc-1">Description:</label>
+                            <textarea id="experience-desc-1" name="experience-desc-1" rows="2" placeholder="Briefly describe your responsibilities."></textarea>
+                        </div>
+                    </div>
+                    <button type="button" class="btn add-item-btn" data-type="experience">Add Experience</button>
+                </div>
+
+                <div class="input-section collapsible" id="projects-section">
+                    <h3>Projects <span class="toggle-icon">+</span></h3>
+                    <div class="collapsible-content" id="projects-container">
                         <div class="project-item">
                             <label for="project-title-1">Project Title:</label>
                             <input type="text" id="project-title-1" name="project-title-1" placeholder="My First Project">
                             <label for="project-desc-1">Project Description:</label>
                             <textarea id="project-desc-1" name="project-desc-1" rows="2" placeholder="A brief description of the project."></textarea>
+                            <label for="project-image-1">Project Image:</label>
+                            <input type="file" id="project-image-1" name="project-image-1" accept="image/*">
                         </div>
                     </div>
-                    <button type="button" id="add-project-btn" class="btn">Add Another Project</button>
+                    <button type="button" class="btn add-item-btn" data-type="project">Add Another Project</button>
                 </div>
                 
-                <div id="contact-section" class="input-section">
-                    <h3>Contact Info</h3>
-                    <div class="input-group">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" placeholder="john.doe@example.com">
+                <div class="input-section collapsible" id="certificates-section">
+                    <h3>Certificates <span class="toggle-icon">+</span></h3>
+                    <div class="collapsible-content" id="certificates-container">
+                        <div class="certificate-item">
+                            <label for="certificate-name-1">Certificate Name:</label>
+                            <input type="text" id="certificate-name-1" name="certificate-name-1" placeholder="Certified Scrum Master">
+                            <label for="certificate-image-1">Certificate Image:</label>
+                            <input type="file" id="certificate-image-1" name="certificate-image-1" accept="image/*">
+                        </div>
                     </div>
-                    <div class="input-group">
-                        <label for="linkedin">LinkedIn URL:</label>
-                        <input type="url" id="linkedin" name="linkedin" placeholder="https://www.linkedin.com/in/johndoe">
+                    <button type="button" class="btn add-item-btn" data-type="certificate">Add Another Certificate</button>
+                </div>
+
+                <div class="input-section collapsible" id="volunteer-section">
+                    <h3>Volunteer Experience <span class="toggle-icon">+</span></h3>
+                    <div class="collapsible-content" id="volunteer-container">
+                        <div class="volunteer-item">
+                            <label for="volunteer-role-1">Role:</label>
+                            <input type="text" id="volunteer-role-1" name="volunteer-role-1" placeholder="Volunteer Tutor">
+                            <label for="volunteer-organization-1">Organization:</label>
+                            <input type="text" id="volunteer-organization-1" name="volunteer-organization-1" placeholder="Community Outreach">
+                        </div>
                     </div>
-                    <div class="input-group">
-                        <label for="github">GitHub URL:</label>
-                        <input type="url" id="github" name="github" placeholder="https://github.com/johndoe">
+                    <button type="button" class="btn add-item-btn" data-type="volunteer">Add Volunteer Experience</button>
+                </div>
+
+                <div class="input-section collapsible" id="contact-section">
+                    <h3>Contact Info <span class="toggle-icon">+</span></h3>
+                    <div class="collapsible-content">
+                        <div class="input-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" placeholder="john.doe@example.com">
+                        </div>
+                        <div class="input-group">
+                            <label for="phone">Phone Number:</label>
+                            <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890">
+                        </div>
+                        <div class="input-group">
+                            <label for="linkedin">LinkedIn URL:</label>
+                            <input type="url" id="linkedin" name="linkedin" placeholder="https://www.linkedin.com/in/johndoe">
+                        </div>
+                        <div class="input-group">
+                            <label for="github">GitHub URL:</label>
+                            <input type="url" id="github" name="github" placeholder="https://github.com/johndoe">
+                        </div>
                     </div>
                 </div>
             </form>
         </div>
 
-        <div id="portfolio-preview" class="portfolio-preview">
+        <div class="controls">
             
-            <section id="preview-home" class="portfolio-section">
-                <header>
-                    <h1 id="preview-name">Your Name</h1>
-                    <p id="preview-bio">Your Bio Goes Here</p>
-                </header>
-            </section>
-
-            <section id="preview-skills" class="portfolio-section">
-                <h2>Skills</h2>
-                <ul id="skills-list"></ul>
-            </section>
-
-            <section id="preview-projects" class="portfolio-section">
-                <h2>Projects</h2>
-                <div id="projects-list"></div>
-            </section>
-
-            <section id="preview-contact" class="portfolio-section">
-                <h2>Contact</h2>
-                <p>Email: <span id="preview-email"></span></p>
-                <p>LinkedIn: <a id="preview-linkedin" href="#" target="_blank"></a></p>
-                <p>GitHub: <a id="preview-github" href="#" target="_blank"></a></p>
-            </section>
+            <label for="color-theme">Choose Color Theme:</label>
+            <p>Select Upto 3 Colors</p>
+            <div class="color-options">
+                <button type="button" class="color-btn active" data-color="blue" style="background-color: #4A90E2;"></button>
+                <button type="button" class="color-btn" data-color="red" style="background-color: #D62828;"></button>
+                <button type="button" class="color-btn" data-color="green" style="background-color: #50C878;"></button>
+                <button type="button" class="color-btn" data-color="purple" style="background-color: #8B5CF6;"></button>
+                <button type="button" class="color-btn" data-color="orange" style="background-color: #F97316;"></button>
+                <button type="button" class="color-btn" data-color="teal" style="background-color: #14B8A6;"></button>
+                <button type="button" class="color-btn" data-color="pink" style="background-color: #EC4899;"></button>
+                <button type="button" class="color-btn" data-color="indigo" style="background-color: #6366F1;"></button>
+                <button type="button" class="color-btn" data-color="yellow" style="background-color: #EAB308;"></button>
+                <button type="button" class="color-btn" data-color="gray" style="background-color: #64748B;"></button>
+            </div>
+            <div class="button-group">
+                <button id="make-portfolio" class="btn">Make Portfolio</button>
+                <button id="theme-switcher" class="btn">Toggle Dark/Light Theme</button>
+            </div>
         </div>
     </main>
-    
-    <div class="controls">
-        <label for="design-theme">Choose Design Layout:</label>
-        <select id="design-theme" name="design-theme">
-            <option value="modern">Modern (Default)</option>
-            <option value="minimalist">Minimalist</option>
-            <option value="creative">Creative</option>
-            <option value="professional">Professional</option>
-        </select>
-        <button id="theme-switcher" class="btn">Toggle Theme</button>
-        <button id="export-html" class="btn">Export as HTML</button>
-    </div>
-    
+
     <script src="appp.js"></script>
 </body>
 </html>
