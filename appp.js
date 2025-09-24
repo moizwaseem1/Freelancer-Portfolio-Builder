@@ -278,6 +278,56 @@ async function getFullHtml() {
         .download-btn:hover {
             background-color: var(--secondary-blue);
         }
+        /* --- New Mobile Responsiveness Styles --- */
+        body.portfolio-page-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .portfolio-header,
+        .portfolio-content {
+            width: 100%;
+            max-width: 900px; /* Limits the max width for large screens */
+        }
+
+        .portfolio-header {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .portfolio-header .profile-img-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 10px;
+        }
+
+        .portfolio-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+  
+  @media (max-width: 600px) {
+         .portfolio-header h1 {
+            font-size: 1.8em;
+    }
+    .portfolio-section h2 {
+        font-size: 1.4em;
+    }
+    .contact-info p,
+    .contact-info a {
+        font-size: 0.9em;
+    }
+}
         /* --- New Fix for button text visibility in dark theme --- */
         body.dark-theme .download-btn {
              color: black;
