@@ -128,7 +128,7 @@ body.dark-theme .input-section {
 }
 
 .input-section.active .collapsible-content {
-    max-height: 1000px; /* A large value to accommodate content */
+    max-height: 5000px; /* A large value to accommodate content */
 }
 
 /* Input and Button Styles */
