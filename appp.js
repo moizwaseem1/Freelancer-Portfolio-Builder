@@ -309,6 +309,7 @@ async function getFullHtml() {
         .portfolio-header,
         .portfolio-content {
             width: 100%;
+            margin: 0 auto;
             max-width: 900px; /* Limits the max width for large screens */
         }
 
