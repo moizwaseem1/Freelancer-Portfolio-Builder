@@ -20,6 +20,20 @@
     --space-xxl: 3rem;    /* 48px */
 }
 
+.remove-item-btn {
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.2s ease;
+}
+
+.remove-item-btn:hover {
+    color: #333;
+}
+
 /* --- Global Styles --- */
 body {
     font-family: 'Inter', sans-serif;
@@ -219,9 +233,10 @@ textarea.error {
 }
 
 .color-options {
+    margin-bottom: 20px;
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-md);
+    gap: 10px;
 }
 
 .color-btn {
