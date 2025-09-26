@@ -24,7 +24,7 @@ document.querySelectorAll('.add-item-btn').forEach(button => {
         newItem.innerHTML = getItemTemplate(type, itemCount);
         container.appendChild(newItem);
     });
-    document.addEventListener('click', (e) => {
+    document.addEventListener('click', (e) => {
     if (e.target.classList.contains('remove-item-btn')) {
         e.target.closest('.experience-item, .projects-item, .certificates-item, .volunteer-item').remove();
     }
@@ -35,26 +35,26 @@ function getItemTemplate(type, index) {
     switch (type) {
         case 'experience':
             return `
-                <div class="input-item-header">
+                <div class="input-item-header">
                     
                     <button type="button" class="remove-item-btn">✕</button>
-                <div class="input-group">
+                <div class="input-group">
                     <label for="experience-title-${index}">Job Title:</label>
-                     <input type="text" id="experience-title-${index}" name="experience-title-${index}" placeholder="Lead Developer">
+                    <input type="text" id="experience-title-${index}" name="experience-title-${index}" placeholder="Lead Developer">
                 </div>
                 <div class="input-group">
                     <label for="experience-company-${index}">Company:</label>
                     <input type="text" id="experience-company-${index}" name="experience-company-${index}" placeholder="Tech Solutions Inc.">
                 </div>
                 <div class="input-group">
-                     <label for="experience-duration-${index}">Duration:</label>
+                    <label for="experience-duration-${index}">Duration:</label>
                     <input type="text" id="experience-duration-${index}" name="experience-duration-${index}" placeholder="Jan 2020 - Dec 2022">
                 </div>
                 <div class="input-group">
                     <label for="experience-desc-${index}">Description:</label>
                     <textarea id="experience-desc-${index}" name="experience-desc-${index}" rows="2" placeholder="Briefly describe your responsibilities."></textarea>
                 </div>
-    `;
+            `;
         case 'projects':
             return `
                 <div class="input-item-header">
@@ -77,10 +77,10 @@ function getItemTemplate(type, index) {
         case 'certificates':
             return `
                 <div class="input-item-header">
-                   
+                    
                    <button type="button" class="remove-item-btn">✕</button>
                 </div>
-                <div class="input-group">
+                <div class="input-group">
                     <label for="certificate-name-${index}">Certificate Name:</label>
                     <input type="text" id="certificate-name-${index}" name="certificate-name-${index}" placeholder="Certified Scrum Master">
                 </div>
@@ -91,11 +91,11 @@ function getItemTemplate(type, index) {
             `;
         case 'volunteer':
             return `
-                <div class="input-item-header">
+                <div class="input-item-header">
                     
                     <button type="button" class="remove-item-btn">✕</button>
                 </div>
-                <div class="input-group">
+                <div class="input-group">
                     <label for="volunteer-role-${index}">Role:</label>
                     <input type="text" id="volunteer-role-${index}" name="volunteer-role-${index}" placeholder="Volunteer Tutor">
                 </div>
@@ -218,7 +218,14 @@ function validateForm() {
 }
 
 async function getFullHtml() {
-    // [Your existing code to collect form data goes here]
+    const fontTheme = document.getElementById('font-theme').value;
+    const fontMap = {
+        'Roboto': "'Roboto', sans-serif",
+        'Montserrat': "'Montserrat', sans-serif",
+        'Playfair Display': "'Playfair Display', serif"
+    };
+    const selectedFont = fontMap[fontTheme] || "'Roboto', sans-serif";
+
     const data = {
         name: document.getElementById('name').value,
         bio: document.getElementById('bio').value,
@@ -254,7 +261,6 @@ async function getFullHtml() {
     data.experience = await getSectionData('experience', 'experience');
     data.volunteer = await getSectionData('volunteer', 'volunteer');
 
-    // Get all CSS rules from the main stylesheet
     const allStyles = Array.from(document.styleSheets)
         .map(sheet => {
             try {
@@ -273,6 +279,15 @@ async function getFullHtml() {
             --primary-blue: ${data.primaryColor};
             --secondary-blue: ${data.secondaryColor};
             --tertiary-color: ${data.tertiaryColor};
+        }
+        
+        body {
+            font-family: ${selectedFont};
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
         }
         .portfolio-header h1, .portfolio-section h2 {
             color: var(--primary-blue);
@@ -298,8 +313,7 @@ async function getFullHtml() {
         .download-btn:hover {
             background-color: var(--secondary-blue);
         }
-        /* --- New Mobile Responsiveness Styles --- */
-        body.portfolio-page-body {
+        .portfolio-page-body {
             padding: 20px;
             display: flex;
             flex-direction: column;
@@ -310,7 +324,7 @@ async function getFullHtml() {
         .portfolio-content {
             width: 100%;
             margin: 0 auto;
-            max-width: 900px; /* Limits the max width for large screens */
+            max-width: 900px;
         }
 
         .portfolio-header {
@@ -337,29 +351,25 @@ async function getFullHtml() {
             gap: 10px;
         }
     
-    @media (max-width: 600px) {
+        @media (max-width: 600px) {
             .portfolio-header h1 {
                 font-size: 1.8em;
+            }
+            .portfolio-section h2 {
+                font-size: 1.4em;
+            }
+            .contact-info p,
+            .contact-info a {
+                font-size: 0.9em;
+            }
         }
-        .portfolio-section h2 {
-            font-size: 1.4em;
-        }
-        .contact-info p,
-        .contact-info a {
-            font-size: 0.9em;
-        }
-    }
-        /* --- New Fix for button text visibility in dark theme --- */
         body.dark-theme .download-btn {
             color: black;
         }
     `;
 
-    // [Your existing code to generate portfolio sections goes here]
     let portfolioSections = '';
     
-    // ... (rest of your portfolioSections generation)
-
     if (data.sections.about) {
         portfolioSections += `
             <section class="portfolio-section" id="preview-about">
@@ -450,7 +460,6 @@ async function getFullHtml() {
         `;
     }
 
-
     const fullHtml = `
 <!DOCTYPE html>
 <html lang="en">
@@ -458,6 +467,9 @@ async function getFullHtml() {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${data.name || 'Portfolio'}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
         ${allStyles}
         ${dynamicStyles}
