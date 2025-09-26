@@ -218,14 +218,6 @@ function validateForm() {
 }
 
 async function getFullHtml() {
-    const fontTheme = document.getElementById('font-theme').value;
-    const fontMap = {
-        'Roboto': "'Roboto', sans-serif",
-        'Montserrat': "'Montserrat', sans-serif",
-        'Playfair Display': "'Playfair Display', serif"
-    };
-    const selectedFont = fontMap[fontTheme] || "'Roboto', sans-serif";
-
     const data = {
         name: document.getElementById('name').value,
         bio: document.getElementById('bio').value,
@@ -282,7 +274,6 @@ async function getFullHtml() {
         }
         
         body {
-            font-family: ${selectedFont};
             line-height: 1.6;
             margin: 0;
             padding: 0;
@@ -350,7 +341,7 @@ async function getFullHtml() {
             flex-direction: column;
             gap: 10px;
         }
-    
+        
         @media (max-width: 600px) {
             .portfolio-header h1 {
                 font-size: 1.8em;
